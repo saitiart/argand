@@ -1,0 +1,513 @@
+/* =============================================================================
+   Complex 4D Visualizer — page + sidebar styles
+   ============================================================================= */
+
+:root {
+    --ui-bg: rgba(255, 255, 255, 0.97);
+    --ui-border: #e4e6eb;
+    --ui-text: #1f2328;
+    --ui-muted: #6b7280;
+    --ui-faint: #f2f3f6;
+    --ui-accent: #4f5bd5;
+    --ui-accent-soft: #eceefc;
+    --ui-danger: #cc3333;
+    --ui-width: 312px;
+    --ui-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --ui-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+}
+
+#canvas-webgpu {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* ---------- Panel shell ---------- */
+
+.ui-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--ui-width);
+    display: flex;
+    flex-direction: column;
+    background: var(--ui-bg);
+    border-right: 1px solid var(--ui-border);
+    box-shadow: 2px 0 14px rgba(15, 20, 40, 0.06);
+    font: 13px/1.35 var(--ui-font);
+    color: var(--ui-text);
+    z-index: 20;
+    transition: transform 0.2s ease;
+    user-select: none;
+}
+
+.ui-panel.collapsed {
+    transform: translateX(-100%);
+}
+
+.ui-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 10px 12px 16px;
+    border-bottom: 1px solid var(--ui-border);
+}
+
+.ui-title {
+    font-weight: 650;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+}
+
+.ui-title small {
+    font-weight: 400;
+    color: var(--ui-muted);
+    margin-left: 6px;
+}
+
+.ui-icon-btn {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ui-muted);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.ui-icon-btn:hover {
+    background: var(--ui-faint);
+    color: var(--ui-text);
+}
+
+.ui-reopen {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 21;
+    display: none;
+    background: var(--ui-bg);
+    border: 1px solid var(--ui-border);
+    box-shadow: 0 2px 8px rgba(15, 20, 40, 0.08);
+}
+
+.ui-reopen.visible {
+    display: block;
+}
+
+.ui-scroll {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.ui-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--ui-border);
+}
+
+/* ---------- Sections ---------- */
+
+.ui-section {
+    border-bottom: 1px solid var(--ui-border);
+}
+
+.ui-section-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 11px 16px;
+    border: none;
+    background: none;
+    font: 600 11px var(--ui-font);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ui-muted);
+    cursor: pointer;
+    text-align: left;
+}
+
+.ui-section-head:hover {
+    color: var(--ui-text);
+}
+
+.ui-chevron {
+    display: inline-block;
+    width: 10px;
+    transition: transform 0.15s ease;
+}
+
+.ui-section.open .ui-chevron {
+    transform: rotate(90deg);
+}
+
+.ui-section-body {
+    display: none;
+    flex-direction: column;
+    gap: 9px;
+    padding: 0 16px 14px;
+}
+
+.ui-section.open > .ui-section-body {
+    display: flex;
+}
+
+.ui-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.ui-group.hidden {
+    display: none;
+}
+
+/* ---------- Rows ---------- */
+
+.ui-row {
+    display: grid;
+    grid-template-columns: 74px 1fr 60px;
+    align-items: center;
+    gap: 8px;
+}
+
+.ui-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ui-label.math {
+    font-style: italic;
+    text-align: right;
+}
+
+.ui-field-label {
+    font-size: 12px;
+    color: var(--ui-muted);
+    margin-bottom: -3px;
+}
+
+input[type="range"].ui-range {
+    width: 100%;
+    margin: 0;
+    accent-color: var(--ui-accent);
+    cursor: pointer;
+}
+
+.ui-num {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px 5px;
+    border: 1px solid var(--ui-border);
+    border-radius: 5px;
+    background: #fff;
+    font: 12px var(--ui-mono);
+    text-align: right;
+    color: var(--ui-text);
+    user-select: text;
+}
+
+.ui-num:focus,
+.ui-select:focus,
+.ui-formula input:focus {
+    outline: none;
+    border-color: var(--ui-accent);
+    box-shadow: 0 0 0 2px var(--ui-accent-soft);
+}
+
+/* hide number spinners */
+.ui-num::-webkit-outer-spin-button,
+.ui-num::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ui-num[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ---------- Toggle switch ---------- */
+
+.ui-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.ui-switch {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    width: 32px;
+    height: 18px;
+    margin: 0;
+    border-radius: 9px;
+    background: #d4d7de;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    flex: none;
+}
+
+.ui-switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease;
+}
+
+.ui-switch:checked {
+    background: var(--ui-accent);
+}
+
+.ui-switch:checked::after {
+    transform: translateX(14px);
+}
+
+/* ---------- Segmented control ---------- */
+
+.ui-segmented {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    border-radius: 7px;
+    background: var(--ui-faint);
+}
+
+.ui-segmented button {
+    flex: 1;
+    min-width: 0;
+    padding: 5px 4px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    font: 12px var(--ui-font);
+    color: var(--ui-muted);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.ui-segmented button:hover {
+    color: var(--ui-text);
+}
+
+.ui-segmented button.active {
+    background: #fff;
+    color: var(--ui-text);
+    font-weight: 550;
+    box-shadow: 0 1px 2px rgba(15, 20, 40, 0.14);
+}
+
+/* ---------- Select, buttons, text ---------- */
+
+.ui-select {
+    width: 100%;
+    padding: 5px 8px;
+    border: 1px solid var(--ui-border);
+    border-radius: 6px;
+    background: #fff;
+    font: 13px var(--ui-font);
+    color: var(--ui-text);
+    cursor: pointer;
+}
+
+.ui-btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ui-btn {
+    padding: 5px 10px;
+    border: 1px solid var(--ui-border);
+    border-radius: 6px;
+    background: #fff;
+    font: 12px var(--ui-font);
+    color: var(--ui-text);
+    cursor: pointer;
+}
+
+.ui-btn:hover {
+    border-color: var(--ui-accent);
+    color: var(--ui-accent);
+}
+
+.ui-hint {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--ui-muted);
+}
+
+.ui-kbd {
+    padding: 0 4px;
+    border: 1px solid var(--ui-border);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    font: 10px var(--ui-mono);
+}
+
+.ui-readout {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.ui-readout span:last-child {
+    font-family: var(--ui-mono);
+}
+
+/* ---------- Formula ---------- */
+
+.ui-formula {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ui-formula span {
+    font-style: italic;
+    white-space: nowrap;
+}
+
+.ui-formula input {
+    flex: 1;
+    min-width: 0;
+    padding: 6px 8px;
+    border: 1px solid var(--ui-border);
+    border-radius: 6px;
+    font: 14px var(--ui-mono);
+    color: var(--ui-text);
+    user-select: text;
+}
+
+.ui-formula input.error {
+    border-color: var(--ui-danger);
+}
+
+.ui-status {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--ui-muted);
+}
+
+.ui-status.error {
+    color: var(--ui-danger);
+}
+
+/* ---------- Quaternion pads ---------- */
+
+.ui-pads {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.ui-pad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.ui-pad canvas {
+    width: 118px;
+    height: 118px;
+    cursor: grab;
+    touch-action: none;
+}
+
+.ui-pad canvas:active {
+    cursor: grabbing;
+}
+
+.ui-pad-title {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ui-pad-caption {
+    font: 11px var(--ui-mono);
+    color: var(--ui-muted);
+    text-align: center;
+}
+
+/* ---------- Contour plots ---------- */
+
+.ui-pad canvas.ui-plot {
+    width: 128px;
+    height: 128px;
+    border-radius: 6px;
+    cursor: default;
+}
+
+.ui-readout.big span:last-child {
+    font-size: 12px;
+    color: var(--ui-text);
+}
+
+.ui-map {
+    width: 280px;
+    height: 210px;
+    border: 1px solid var(--ui-border);
+    border-radius: 6px;
+    cursor: crosshair;
+    touch-action: none;
+    align-self: center;
+}
+
+/* ---------- No WebGPU ---------- */
+
+.fatal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 24px;
+    font: 15px/1.5 var(--ui-font);
+    color: var(--ui-text);
+}
+
+.fatal h1 {
+    font-size: 22px;
+    margin: 0 0 12px;
+}
+
+.fatal code {
+    font: 13px var(--ui-mono);
+    background: var(--ui-faint);
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
+.fatal .detail {
+    font-size: 12px;
+    color: var(--ui-muted);
+}

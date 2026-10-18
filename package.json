@@ -1,0 +1,21 @@
+{
+  "name": "complex-gpu",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@webgpu/types": "^0.1.69",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
+  },
+  "dependencies": {
+    "3d-view-controls": "^2.2.2",
+    "gl-matrix": "^3.4.3",
+    "mathjs": "^15.2.0"
+  }
+}
