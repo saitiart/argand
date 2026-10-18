@@ -78,7 +78,7 @@ export const INITIAL_PARAMS: Params = {
     showAxes: true,
     showBoundingBox: true,
     clipToBox: true,
-    pole_radius: 0.04,
+    pole_radius: 0.00,
     topology: 'triangle-list',
     use_quaternion_rotation: 0.0,
     quat_angle_left: 0.0,
