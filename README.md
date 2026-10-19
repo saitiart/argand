@@ -1,10 +1,10 @@
-<img width="800" height="691" alt="sin-video" src="https://github.com/user-attachments/assets/c1d3ebc0-52c6-464b-a91e-9511d25aa146" />
-<img width="1299" height="1031" alt="riemann" src="https://github.com/user-attachments/assets/720c4301-ad2f-432c-98a7-c7dae718369b" />
-<img width="800" height="449" alt="params" src="https://github.com/user-attachments/assets/c1cdb78e-1d61-4e48-9091-4a2aedb5f120" />
-<img width="1299" height="1031" alt="julia" src="https://github.com/user-attachments/assets/11b96fc9-a683-41f4-8449-218a8999dc45" />
-<img width="1299" height="1031" alt="gamma" src="https://github.com/user-attachments/assets/7463360f-e618-48ca-855b-407d084e91b4" />
-<img width="1752" height="1125" alt="comp-calc" src="https://github.com/user-attachments/assets/dcf37057-c23c-4df8-9322-2a837ed956a0" />
-<img width="1920" height="1079" alt="banner" src="https://github.com/user-attachments/assets/0f661ca9-c6bb-414f-8e3b-844aa89d7d3a" />
+<img width="100%" alt="sin-video" src="https://github.com/user-attachments/assets/c1d3ebc0-52c6-464b-a91e-9511d25aa146" />
+<img width="100%" alt="riemann" src="https://github.com/user-attachments/assets/720c4301-ad2f-432c-98a7-c7dae718369b" />
+<img width="100%"  alt="params" src="https://github.com/user-attachments/assets/c1cdb78e-1d61-4e48-9091-4a2aedb5f120" />
+<img width="100%"  alt="julia" src="https://github.com/user-attachments/assets/11b96fc9-a683-41f4-8449-218a8999dc45" />
+<img width="100%"  alt="gamma" src="https://github.com/user-attachments/assets/7463360f-e618-48ca-855b-407d084e91b4" />
+<img width="100%"  alt="comp-calc" src="https://github.com/user-attachments/assets/dcf37057-c23c-4df8-9322-2a837ed956a0" />
+<img width="100%" alt="banner" src="https://github.com/user-attachments/assets/0f661ca9-c6bb-414f-8e3b-844aa89d7d3a" />
 # Complex 4D Visualizer
 
 Interactive WebGPU visualizer for complex functions f : ℂ → ℂ. The graph of f
