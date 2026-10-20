@@ -10,7 +10,9 @@
 Interactive WebGPU visualizer for complex functions f : ℂ → ℂ. The graph of f
 is inherently 4D (Re z, Im z, Re f, Im f); here it is rotated in 4D,
 projected to 3D and coloured by phase (hue = arg f, lightness = |f|). It is based on the code written for a paper you can 
-find in <https://github.com/saitiart/complex-function-renderer>, although it still doesn't include parametric equations.
+find in <https://github.com/saitiart/complex-function-renderer>, although it still doesn't include parametric equations. 
+
+**You can also directly read the paper here <https://dl.acm.org/doi/epdf/10.1145/3822516.3834886>**
 
 ## Running
 
